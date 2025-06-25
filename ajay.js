@@ -1,120 +1,113 @@
-console.log("Welcome to DJ YADAV");
+const songs = [
+  { title: "Solid Body", src: "songs/31.mp3", img: "covers/31.jpeg" },
+  { title: "Moka_Soka", src: "songs/32.mp3", img: "covers/32.jpeg" },
+  { title: "MOTO", src: "songs/33.mp3", img: "covers/33.jpeg" },
+  { title: "Suthri Si Chori", src: "songs/34.mp3", img: "covers/34.jpeg" },
+  { title: "Husband_Bawla", src: "songs/35.mp3", img: "covers/35.jpeg" },
+   { title: "Bhang_Ka_Barota", src: "songs/36.mp3", img: "covers/36.jpeg" },
+  { title: "Soldier", src: "songs/37.mp3", img: "covers/37.jpeg" },
+  { title: "TIK TOK", src: "songs/38.mp3", img: "covers/38.jpeg" },
+  { title: "UNCLE", src: "songs/39.mp3", img: "covers/39.jpeg" },
+  { title: "Love_You_Moto", src: "songs/40.mp3", img: "covers/40.jpeg" },
+   { title: "Kamar_Teri_Left_Right_Halle", src: "songs/41.mp3", img: "covers/41.jpeg" },
+  { title: "Bahu_Kale_K", src: "songs/42.mp3", img: "covers/42.jpeg" },
+  { title: "Fauji", src: "songs/43.mp3", img: "covers/43.jpeg" },
+  { title: "BHABHI", src: "songs/44.mp3", img: "covers/44.jpeg" },
+  { title: "Kaliya_Murad", src: "songs/45.mp3", img: "covers/45.jpeg" },
+   { title: "Mehnga_Perfume", src: "songs/46.mp3", img: "covers/46.jpeg" },
+  { title: "Olha Mein Patola", src: "songs/47.mp3", img: "covers/47.jpeg" },
+  { title: "Lamba Lamba Ghunghat - Ajay Hooda", src: "songs/48.mp3", img: "covers/48.jpeg" },
+  { title: "Age Gap - Ajay Hooda", src: "songs/49.mp3", img: "covers/49.jpeg" },
+  { title: "Patange - Ajay Hooda", src: "songs/50.mp3", img: "covers/50.jpeg" }
+];
+const audio = new Audio();
+let current = 0;
+let isPlaying = false;
 
-// Initialize the Variables
-let songIndex = 30;
-let audioElement = new Audio('31.mp3');
-let masterPlay = document.getElementById('masterPlay');
-let myProgressBar = document.getElementById('myProgressBar');
-let gif = document.getElementById('gif');
-let masterSongName = document.getElementById('masterSongName');
-let songItems = Array.from(document.getElementsByClassName('songItem'));
+const songList = document.getElementById("songList");
+const nowPlaying = document.getElementById("nowPlaying");
+const playBtn = document.getElementById("play");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const seekbar = document.getElementById("seekbar");
 
-let songs = [
-   
-    {songName: "Solid Body ", filePath: "songs./31.mp3", coverPath: "covers./31.jpeg"},
-    {songName: "Moka_Soka", filePath: "songs./32.mp3", coverPath: "covers./32.jpeg"},
-    {songName: "Moto", filePath: "songs./12.mp3", coverPath: "covers./33.jpeg"},
-    {songName: "Suthri Si Chori", filePath: "songs./13s./14.mp3", coverPath: "covers./34.jpeg"},
-    {songName: "Husband_Bawla", filePath: "songs./15.mp3", coverPath: "covers./35.jpeg"},
-    {songName: "Bhang_Ka_Barota", filePath: "songs./17.mp3", coverPath: "covers./36.jpeg"},
-    {songName: "Soldier", filePath: "songs./16.mp3", coverPath: "covers./37.jpeg"},
-    {songName: "Tik_Tok", filePath: "songs./18.mp3", coverPath: "covers./38.jpeg"},
-    {songName: "Uncle", filePath: "songs./19.mp3", coverPath: "covers./39.jpeg"},
-    {songName: "Love_You_Moto", filePath: "songs./20.mp3", coverPath: "covers./40.jpeg"},
-    {songName: "Kamar_Teri_Left_Right_Halle", filePath: "songs./21.mp3", coverPath: "covers./41.jpeg"},
-    {songName: "Bahu_Kale_K", filePath: "songs./22.mp3", coverPath: "covers./42.jpeg"},
-    {songName: "Fauji", filePath: "songs./23.mp3", coverPath: "covers./43.jpeg"},
-    {songName: "Bhabhi", filePath: "songs./24.mp3", coverPath: "covers./44.jpeg"},
-    {songName: "Kaliya_Murad", filePath: "songs./25.mp3", coverPath: "covers./45.jpeg"},
-    {songName: "Mehnga_Perfume", filePath: "songs./26.mp3", coverPath: "covers./46.jpeg"},
-    {songName: "Olha Mein Patola", filePath: "songs./27.mp3", coverPath: "covers./47.jpeg"},
-    {songName: "Lamba Lamba Ghunghat - Ajay Hooda", filePath: "songs./28.mp3", coverPath: "covers./48.jpeg"},
-    {songName: "Age Gap - Ajay Hooda", filePath: "songs./29.mp3", coverPath: "covers./49.jpeg"},
-    {songName: "Patange - Ajay Hooda ", filePath: "songs./30.mp3", coverPath: "covers./50.jpeg"},
-]
+// Load playlist
+songs.forEach((song, index) => {
+  const li = document.createElement("li");
+  li.innerHTML = `
+    <img src="${song.img}" alt="song ${index + 1}">
+    <span>${song.title}</span>
+    <span>${"--:--"}</span>`;
+  li.onclick = () => loadTrack(index);
+  songList.appendChild(li);
+});
 
-songItems.forEach((element, i)=>{ 
-    element.getElementsByTagName("img")[0].src = songs[i].coverPath; 
-    element.getElementsByClassName("songName")[0].innerText = songs[i].songName; 
-})
- 
-
-// Handle play/pause click
-masterPlay.addEventListener('click', ()=>{
-    if(audioElement.paused || audioElement.currentTime<=0){
-        audioElement.play();
-        masterPlay.classList.remove('fa-play-circle');
-        masterPlay.classList.add('fa-pause-circle');
-        gif.style.opacity = 1;
-    }
-    else{
-        audioElement.pause();
-        masterPlay.classList.remove('fa-pause-circle');
-        masterPlay.classList.add('fa-play-circle');
-        gif.style.opacity = 0;
-    }
-})
-// Listen to Events
-audioElement.addEventListener('timeupdate', ()=>{ 
-    // Update Seekbar
-    progress = parseInt((audioElement.currentTime/audioElement.duration)* 100); 
-    myProgressBar.value = progress;
-})
-
-myProgressBar.addEventListener('change', ()=>{
-    audioElement.currentTime = myProgressBar.value * audioElement.duration/100;
-})
-
-const makeAllPlays = ()=>{
-    Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
-        element.classList.remove('fa-pause-circle');
-        element.classList.add('fa-play-circle');
-    })
+function loadTrack(index) {
+  current = index;
+  audio.src = songs[current].src;
+  nowPlaying.textContent = `Now Playing: ${songs[current].title}`;
+  if (isPlaying) audio.play();
+  document.querySelector(".main-image img").src = songs[current].img;
 }
 
-Array.from(document.getElementsByClassName('songItemPlay')).forEach((element)=>{
-    element.addEventListener('click', (e)=>{ 
-        makeAllPlays();
-        songIndex = parseInt(e.target.id)-10;
-        e.target.classList.remove('fa-play-circle');
-        e.target.classList.add('fa-pause-circle');
-        audioElement.src = `songs/${songIndex+1}.mp3`;
-        masterSongName.innerText = songs[songIndex].songName;
-        audioElement.currentTime = 0;
-        audioElement.play();
-        gif.style.opacity = 1;
-        masterPlay.classList.remove('fa-play-circle');
-        masterPlay.classList.add('fa-pause-circle');
-    })
-})
+playBtn.onclick = () => {
+  if (!audio.src) loadTrack(current);
+  if (audio.paused) {
+    audio.play(); isPlaying = true;
+    playBtn.textContent = "⏸️";
+  } else {
+    audio.pause(); isPlaying = false;
+    playBtn.textContent = "▶️";
+  }
+};
 
-document.getElementById('next').addEventListener('click', ()=>{
-    if(songIndex>=29){
-        songIndex = 10
-    }
-    else{
-        songIndex += 1;
-    }
-    audioElement.src = `songs/${songIndex+1}.mp3`;
-    masterSongName.innerText = songs[songIndex].songName;
-    audioElement.currentTime = 0;
-    audioElement.play();
-    masterPlay.classList.remove('fa-play-circle');
-    masterPlay.classList.add('fa-pause-circle');
+prevBtn.onclick = () => {
+  current = (current - 1 + songs.length) % songs.length;
+  loadTrack(current);
+};
 
-})
+nextBtn.onclick = () => {
+  current = (current + 1) % songs.length;
+  loadTrack(current);
+};
 
-document.getElementById('previous').addEventListener('click', ()=>{
-    if(songIndex<=10){
-        songIndex = 10
-    }
-    else{
-        songIndex -= 1;
-    }
-    audioElement.src = `songs/${songIndex+1}.mp3`;
-    masterSongName.innerText = songs[songIndex].songName;
-    audioElement.currentTime = 0;
-    audioElement.play();
-    masterPlay.classList.remove('fa-play-circle');
-    masterPlay.classList.add('fa-pause-circle');
-})
+audio.ontimeupdate = () => {
+  if (!audio.duration) return;
+  seekbar.max = audio.duration;
+  seekbar.value = audio.currentTime;
+};
+
+seekbar.oninput = () => {
+  audio.currentTime = seekbar.value;
+};
+
+audio.onended = () => nextBtn.click();
+
+// Initialize
+loadTrack(0);
+audio.pause();
+const gif = document.getElementById("gif");
+
+audio.onplay = () => {
+  gif.style.display = "inline";
+  playBtn.textContent = "⏸️";
+  isPlaying = true;
+};
+
+audio.onpause = () => {
+  gif.style.display = "none";
+  playBtn.textContent = "▶️";
+  isPlaying = false;
+};
+
+audio.onended = () => {
+  gif.style.display = "none";
+  nextBtn.click();
+};
+function loadTrack(index) {
+  current = index;
+  audio.src = songs[current].src;
+  nowPlayingFooter.textContent = `Now Playing: ${songs[current].title}`;
+  document.querySelector(".main-image img").src = songs[current].img;
+  if (isPlaying) audio.play();
+}
