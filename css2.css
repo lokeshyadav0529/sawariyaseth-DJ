@@ -1,0 +1,109 @@
+/* Reset & Font */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Bree Serif", serif;
+  background: #fefefe;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* Headings */
+.h-primary {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 20px;
+  color: #333;
+}
+
+.h-secondary {
+  font-size: 1.3rem;
+  margin: 10px 0 5px 0;
+  color: #222;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+/* Grid Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Playlist Card */
+.box {
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.box img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.box p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 10px 10px;
+  text-align: center;
+}
+
+/* View Button */
+.btn {
+  display: block;
+  width: 80%;
+  margin: 10px auto 15px;
+  padding: 10px 0;
+  background-color: #a30000;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #750000;
+}
+
+/* Mobile Specific Styles */
+@media screen and (max-width: 768px) {
+  .h-primary {
+    font-size: 2.2rem;
+  }
+
+  .grid-container {
+    padding: 10px;
+    grid-template-columns: 1fr;
+  }
+
+  .box img {
+    height: 180px;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+  }
+}
