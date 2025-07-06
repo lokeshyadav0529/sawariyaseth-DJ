@@ -6,6 +6,7 @@
   <title>SANWARIYA SETH DJ</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    /* [CSS remains the same — already written above] */
     * {
       margin: 0;
       padding: 0;
@@ -20,7 +21,7 @@
     }
 
     header {
-      background: linear-gradient(90deg, #1a1a1a, #2c2c2c);
+      background: linear-gradient(to right, #111, #1a1a1a, #333);
       color: #fff;
       padding: 20px 30px;
       display: flex;
@@ -51,10 +52,26 @@
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s ease;
+      position: relative;
     }
 
     nav a:hover {
       color: #ffcc00;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #ffcc00;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     main {
@@ -63,9 +80,16 @@
     }
 
     .playlist h1 {
-      font-size: 2.8rem;
+      font-size: clamp(1.5rem, 4vw, 2.8rem);
       color: #ffcc00;
       margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
+      animation: floatText 3s ease-in-out infinite;
+    }
+
+    @keyframes floatText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
 
     #songList {
@@ -83,11 +107,39 @@
       cursor: pointer;
       transition: background 0.3s ease, transform 0.2s;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      position: relative;
     }
 
     #songList li:hover {
       background: #2b2b2b;
-      transform: translateY(-2px);
+      transform: scale(1.03);
+      box-shadow: 0 6px 15px rgba(255, 204, 0, 0.2);
+    }
+
+    #songList li::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #ffcc00, #ff0066, #00f2ff);
+      z-index: -1;
+      border-radius: 12px;
+      filter: blur(5px);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #songList li:hover::before {
+      opacity: 1;
+    }
+
+    .active-song {
+      background: #333;
+      border: 2px solid #ffcc00;
     }
 
     .main-image img {
@@ -96,6 +148,12 @@
       margin-top: 30px;
       border-radius: 14px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .main-image img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 25px rgba(255, 204, 0, 0.3);
     }
 
     footer {
@@ -103,6 +161,16 @@
       color: #f1f1f1;
       padding: 30px 20px;
       text-align: center;
+    }
+
+    footer::before {
+      content: '';
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(to right, #ffcc00, #ff0066, #00f2ff);
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(255, 204, 0, 0.5);
     }
 
     .now-playing {
@@ -118,6 +186,7 @@
       flex-wrap: wrap;
       align-items: center;
       margin-bottom: 20px;
+      position: relative;
     }
 
     .controls button {
@@ -133,12 +202,55 @@
 
     .controls button:hover {
       background: #444;
+      box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
+    }
+
+    .controls button#play {
+      animation: pulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7); }
+      70% { box-shadow: 0 0 0 12px rgba(255, 204, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
+    }
+
+    .controls::before {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, #ffcc00 0%, transparent 70%);
+      border-radius: 50%;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: spin 4s linear infinite;
+      opacity: 0.15;
+    }
+
+    @keyframes spin {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(360deg); }
     }
 
     #seekbar {
       width: 90%;
       max-width: 500px;
       accent-color: #ffcc00;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #ffcc00;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1e1e1e;
     }
 
     @media (max-width: 768px) {
@@ -155,148 +267,9 @@
         width: 95%;
       }
     }
-    /* Header glow */
-header strong {
-  font-size: 1.6rem;
-  text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
-}
-
-/* Nav link underline animation */
-nav a {
-  position: relative;
-}
-nav a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: #ffcc00;
-  transition: width 0.3s;
-}
-nav a:hover::after {
-  width: 100%;
-}
-
-/* Pulsing play button */
-.controls button#play {
-  animation: pulse 1.8s infinite ease-in-out;
-}
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7); }
-  70% { box-shadow: 0 0 0 12px rgba(255, 204, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
-}
-
-/* Playlist hover scale and glow */
-#songList li:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 15px rgba(255, 204, 0, 0.2);
-}
-
-/* Responsive title and container spacing */
-.playlist h1 {
-  text-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
-}
-
-/* Image hover zoom */
-.main-image img {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.main-image img:hover {
-  transform: scale(1.02);
-  box-shadow: 0 10px 25px rgba(255, 204, 0, 0.3);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-thumb {
-  background: #ffcc00;
-  border-radius: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #1e1e1e;
-}
-    
-/* Neon glowing border for song list */
-#songList li {
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  position: relative;
-}
-#songList li::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #ffcc00, #ff0066, #00f2ff);
-  z-index: -1;
-  border-radius: 12px;
-  filter: blur(5px);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-#songList li:hover::before {
-  opacity: 1;
-}
-
-/* Gradient background for header */
-header {
-  background: linear-gradient(to right, #111, #1a1a1a, #333);
-}
-
-/* Stylish glowing footer line */
-footer::before {
-  content: '';
-  display: block;
-  height: 4px;
-  width: 100%;
-  background: linear-gradient(to right, #ffcc00, #ff0066, #00f2ff);
-  margin-bottom: 20px;
-  box-shadow: 0 0 12px rgba(255, 204, 0, 0.5);
-}
-
-/* Glow effect on footer buttons */
-.controls button:hover {
-  box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
-}
-
-/* Animated floating text effect for h1 */
-.playlist h1 {
-  animation: floatText 3s ease-in-out infinite;
-}
-@keyframes floatText {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-/* Floating animated disc behind play button */
-.controls::before {
-  content: '';
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle, #ffcc00 0%, transparent 70%);
-  border-radius: 50%;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: spin 4s linear infinite;
-  opacity: 0.15;
-}
-@keyframes spin {
-  0% { transform: translateX(-50%) rotate(0deg); }
-  100% { transform: translateX(-50%) rotate(360deg); }
-}
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">
       <img src="SAWARIYA_SETH.png" alt="DJ Logo" class="logo-img">
@@ -312,18 +285,7 @@ footer::before {
   <main>
     <div class="playlist">
       <h1>SANWARIYA SETH BEST BHAJAN</h1>
-      <ul id="songList">
-  <li onclick="loadSong(0)">halke me na levu sawariya ki maya</li>
-  <li onclick="loadSong(1)">Gadiya_Gadiya_Hotla_Pe_Naam_Likhyo_Sanwariya_Ko </li>
-  <li onclick="loadSong(2)">Mharo_Seth_Rukhalo_</li>
-  <li onclick="loadSong(3)">बैंक_भी_छोटो_पड़ग्या_रे_म्हारो_सांवरियो_मोटो_प्रकाश_माली_मेहंदवास</li>
-  <li onclick="loadSong(4)">मारा_बैंक_को_मैनेजर_सेठ_सांवरीयो_ll_सांवरिया_ll</li>
-  <li onclick="loadSong(5)">मेरा_सबसे_बड़ा_है_बैंक_सेठ_सांवरिया_ll_सांवरिया_ll</li>
-  <li onclick="loadSong(6)">मेरी_गाड़ी_मेरा_बंगला_सब_कुछ_तेरो_सांवरिया_सेठ</li>
-  <li onclick="loadSong(7)">सांवरिया_नाम_की_है_मरोड़_चाहे_छीजों_दुनिया_करोड़</li>
-  <li onclick="loadSong(8)">थारे_भरोसे_मारा_सांवरा_Sawariya_seth_Bhajan_गोकुल_शर्मा</li>
-  <li onclick="loadSong(9)">मत_करो_सांवरिया_लेट_कर_दो_मारो_सिस्टम_सेट</li>
-</ul>
+      <ul id="songList"></ul>
     </div>
     <div class="main-image">
       <img src="images/s1.jpg" alt="DJ Yadav Cover">
@@ -342,94 +304,95 @@ footer::before {
   </footer>
 
   <script>
-const songs = [
-{ title: "halke me na levu sawariya ki maya ", src: "songs/1.mp3", img: "covers/1.jpeg" },
-  { title: "Gadiya_Gadiya_Hotla_Pe_Naam_Likhyo_Sanwariya_Ko ", src: "songs/2.mp3", img: "covers/2.jpeg" },
-  { title: "Mharo_Seth_Rukhalo_", src: "songs/3.mp3", img: "covers/3.jpeg" },
-  { title: "बैंक_भी_छोटो_पड़ग्या_रे_म्हारो_सांवरियो_मोटो_प्रकाश_माली_मेहंदवास", src: "songs/4.mp3", img: "covers/4.jpeg" },
-  { title: "मारा_बैंक_को_मैनेजर_सेठ_सांवरीयो_ll_सांवरिया_ll", src: "songs/5.mp3", img: "covers/5.jpeg" },
-   { title: "मेरा_सबसे_बड़ा_है_बैंक_सेठ_सांवरिया_ll_सांवरिया_ll", src: "songs/6.mp3", img: "covers/6.jpeg" },
-  { title: "मेरी_गाड़ी_मेरा_बंगला_सब_कुछ_तेरो_सांवरिया_सेठ ", src: "songs/7.mp3", img: "covers/7.jpeg" },
-  { title: "सांवरिया_नाम_की_है_मरोड़_चाहे_छीजों_दुनिया_करोड़", src: "songs/8.mp3", img: "covers/8.jpeg" },
-  { title: "थारे_भरोसे_मारा_सांवरा_Sawariya_seth_Bhajan_गोकुल_शर्मा", src: "songs/9.mp3", img: "covers/9.jpeg" },
-  { title: "मत_करो_सांवरिया_लेट_कर_दो_मारो_सिस्टम_सेट", src: "songs/10.mp3", img: "covers/10.jpeg" }
-];
+    const songs = [
+      { title: "halke me na levu sawariya ki maya", src: "songs/1.mp3", img: "covers/1.jpeg" },
+      { title: "Gadiya_Gadiya_Hotla_Pe_Naam_Likhyo_Sanwariya_Ko", src: "songs/2.mp3", img: "covers/2.jpeg" },
+      { title: "Mharo_Seth_Rukhalo_", src: "songs/3.mp3", img: "covers/3.jpeg" },
+      { title: "बैंक_भी_छोटो_पड़ग्या_रे_म्हारो_सांवरियो_मोटो_प्रकाश_माली_मेहंदवास", src: "songs/4.mp3", img: "covers/4.jpeg" },
+      { title: "मारा_बैंक_को_मैनेजर_सेठ_सांवरीयो", src: "songs/5.mp3", img: "covers/5.jpeg" },
+      { title: "मेरा_सबसे_बड़ा_है_बैंक_सेठ_सांवरिया", src: "songs/6.mp3", img: "covers/6.jpeg" },
+      { title: "मेरी_गाड़ी_मेरा_बंगला_सब_कुछ_तेरो_सांवरिया_सेठ", src: "songs/7.mp3", img: "covers/7.jpeg" },
+      { title: "सांवरिया_नाम_की_है_मरोड़", src: "songs/8.mp3", img: "covers/8.jpeg" },
+      { title: "थारे_भरोसे_मारा_सांवरा", src: "songs/9.mp3", img: "covers/9.jpeg" },
+      { title: "मत_करो_सांवरिया_लेट", src: "songs/10.mp3", img: "covers/10.jpeg" }
+    ];
 
-const audio = new Audio();
-let current = 0;
-let isPlaying = false;
+    const audio = new Audio();
+    let current = 0;
+    let isPlaying = false;
 
-const songList = document.getElementById("songList");
-const nowPlayingFooter = document.getElementById("nowPlayingFooter");
-const playBtn = document.getElementById("play");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
-const seekbar = document.getElementById("seekbar");
-const gif = document.getElementById("gif");
+    const songList = document.getElementById("songList");
+    const nowPlayingFooter = document.getElementById("nowPlayingFooter");
+    const playBtn = document.getElementById("play");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+    const seekbar = document.getElementById("seekbar");
+    const gif = document.getElementById("gif");
+    const mainImage = document.querySelector(".main-image img");
 
-songs.forEach((song, index) => {
-  const li = document.createElement("li");
-  li.innerHTML = `
-    <img src="${song.img}" alt="song ${index + 1}">
-    <span>${song.title}</span>
-    <span>--:--</span>`;
-  li.onclick = () => loadTrack(index);
-  songList.appendChild(li);
-});
+    songs.forEach((song, index) => {
+      const li = document.createElement("li");
+      li.textContent = song.title;
+      li.addEventListener("click", () => loadTrack(index));
+      songList.appendChild(li);
+    });
 
-function loadTrack(index) {
-  current = index;
-  audio.src = songs[current].src;
-  nowPlayingFooter.textContent = `Now Playing: ${songs[current].title}`;
-  document.querySelector(".main-image img").src = songs[current].img;
-  if (isPlaying) audio.play();
-}
+    function loadTrack(index) {
+      const lis = songList.querySelectorAll("li");
+      lis.forEach(li => li.classList.remove("active-song"));
+      lis[index].classList.add("active-song");
 
-playBtn.onclick = () => {
-  if (!audio.src) loadTrack(current);
-  if (audio.paused) {
-    audio.play();
-    isPlaying = true;
-    playBtn.textContent = "⏸️";
-    gif.style.display = "inline";
-  } else {
-    audio.pause();
-    isPlaying = false;
-    playBtn.textContent = "▶️";
-    gif.style.display = "none";
-  }
-};
+      current = index;
+      audio.src = songs[current].src;
+      nowPlayingFooter.textContent = `Now Playing: ${songs[current].title}`;
+      mainImage.src = songs[current].img;
+      if (isPlaying) audio.play();
+    }
 
-prevBtn.onclick = () => {
-  current = (current - 1 + songs.length) % songs.length;
-  loadTrack(current);
-  audio.play();
-};
+    playBtn.addEventListener("click", () => {
+      if (!audio.src) loadTrack(current);
+      if (audio.paused) {
+        audio.play();
+        isPlaying = true;
+        playBtn.textContent = "⏸️";
+        gif.style.display = "inline";
+      } else {
+        audio.pause();
+        isPlaying = false;
+        playBtn.textContent = "▶️";
+        gif.style.display = "none";
+      }
+    });
 
-nextBtn.onclick = () => {
-  current = (current + 1) % songs.length;
-  loadTrack(current);
-  audio.play();
-};
+    prevBtn.addEventListener("click", () => {
+      current = (current - 1 + songs.length) % songs.length;
+      loadTrack(current);
+      audio.play();
+    });
 
-audio.ontimeupdate = () => {
-  if (audio.duration) {
-    seekbar.max = audio.duration;
-    seekbar.value = audio.currentTime;
-  }
-};
+    nextBtn.addEventListener("click", () => {
+      current = (current + 1) % songs.length;
+      loadTrack(current);
+      audio.play();
+    });
 
-seekbar.oninput = () => {
-  audio.currentTime = seekbar.value;
-};
+    audio.addEventListener("timeupdate", () => {
+      if (audio.duration) {
+        seekbar.max = audio.duration;
+        seekbar.value = audio.currentTime;
+      }
+    });
 
-audio.onended = () => {
-  gif.style.display = "none";
-  nextBtn.click();
-};
+    seekbar.addEventListener("input", () => {
+      audio.currentTime = seekbar.value;
+    });
 
-// Start with first track loaded but not playing
-loadTrack(0);
+    audio.addEventListener("ended", () => {
+      gif.style.display = "none";
+      nextBtn.click();
+    });
+
+    loadTrack(0);
   </script>
 </body>
 </html>
