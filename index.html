@@ -1,184 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SANWARIYA SETH DJ</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* CSS content remains the same */
-        * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f0d9;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background: #000;
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo-img {
-      height: 40px;
-    }
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    nav a {
-      color: #ccc;
-      margin: 5px 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      color: #fff;
-    }
-    main {
-      display: flex;
-      flex: 1;
-      flex-wrap: wrap;
-      padding: 20px;
-    }
-    .playlist {
-      flex: 1 1 300px;
-      max-width: 100%;
-    }
-    .playlist h1 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-    ul {
-      list-style: none;
-    }
-    li {
-      background: white;
-      border-radius: 999px;
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: background 0.2s;
-      flex-wrap: wrap;
-    }
-    li:hover {
-      background: #f0e6c8;
-    }
-    li.active {
-      background: #0ff;
-      color: #000;
-      font-weight: bold;
-    }
-    li img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-    .main-image {
-      flex: 1 1 300px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
-    }
-    .main-image img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-    footer {
-      background: #000;
-      color: #fff;
-      padding: 20px;
-      position: sticky;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #nowPlayingFooter {
-      font-style: italic;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-    .controls button {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: #fff;
-      cursor: pointer;
-    }
-    .controls button:hover {
-      color: #0ff;
-    }
-    #gif {
-      height: 30px;
-      animation: pulse 1.2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.1); opacity: 1; }
-    }
-    #seekbar {
-      width: 90%;
-      max-width: 600px;
-      height: 10px;
-      border-radius: 5px;
-      background: #333;
-      accent-color: #0ff;
-    }
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-      main {
-        flex-direction: column;
-        padding: 10px;
-      }
-      .playlist h1 {
-        font-size: 1.3rem;
-      }
-      .main-image {
-        margin-top: 10px;
-      }
-      .controls button {
-        font-size: 1.2rem;
-      }
-    }
-    footer {
+footer {
   background: #000;
   color: #fff;
-  padding: 20px;
+  padding: 15px;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -186,169 +9,59 @@
   flex-direction: column;
   align-items: center;
   z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
 }
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px;
+}
+
+#seekbar {
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  background: #333;
+  accent-color: #0ff;
+  margin-top: 8px;
+}
+
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
   main {
     flex-direction: column;
     padding: 10px;
-    margin-bottom: 160px; /* space for sticky footer */
+    margin-bottom: 140px; /* Extra space for sticky footer */
   }
-  .playlist h1 {
-    font-size: 1.3rem;
-  }
-  .main-image {
-    margin-top: 10px;
-  }
+
   .controls button {
     font-size: 1.2rem;
   }
+
+  #seekbar {
+    height: 10px;
+  }
+
+  footer {
+    padding: 12px;
+  }
 }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="logo">
-      <img src="SAWARIYA_SETH.png" alt="DJ Logo" class="logo-img">
-      <strong>SAWARIYA_SETH</strong>
-    </div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="playlist1.html">PLAYLIST</a>
-    </nav>
-  </header>
 
-  <main>
-    <div class="playlist">
-      <h1>SANWARIYA SETH BEST BHAJAN</h1>
-      <ul id="songList"></ul>
-    </div>
-    <div class="main-image">
-      <img src="images/s1.jpg" alt="DJ Yadav Cover" />
-    </div>
-  </main>
-
-  <footer>
-    <div id="nowPlayingFooter" class="now-playing">Now Playing: --</div>
-    <div class="controls">
-      <img src="playing.gif" alt="Playing" id="gif" style="display: none;" />
-      <button id="prev">⏮️</button>
-      <button id="play">▶️</button>
-      <button id="next">⏭️</button>
-    </div>
-    <input type="range" id="seekbar" value="0" min="0" max="100" />
-  </footer>
-
-  <script>
-    const songs = [
-      { title: "halke me na levu sawariya ki maya ", src: "songs/1.mp3", img: "covers/1.jpeg" },
-      { title: "Gadiya_Gadiya_Hotla_Pe_Naam_Likhyo_Sanwariya_Ko ", src: "songs/2.mp3", img: "covers/2.jpeg" },
-      { title: "Mharo_Seth_Rukhalo_", src: "songs/3.mp3", img: "covers/3.jpeg" },
-      { title: "बैंक_भी_छोटो_पड़ग्या_रे_म्हारो_सांवरियो_मोटो_प्रकाश_माली_मेहंदवास", src: "songs/4.mp3", img: "covers/4.jpeg" },
-      { title: "मारा_बैंक_को_मैनेजर_सेठ_सांवरीयो_ll_सांवरिया_ll", src: "songs/5.mp3", img: "covers/5.jpeg" },
-      { title: "मेरा_सबसे_बड़ा_है_बैंक_सेठ_सांवरिया_ll_सांवरिया_ll", src: "songs/6.mp3", img: "covers/6.jpeg" },
-      { title: "मेरी_गाड़ी_मेरा_बंगला_सब_कुछ_तेरो_सांवरिया_सेठ ", src: "songs/7.mp3", img: "covers/7.jpeg" },
-      { title: "सांवरिया_नाम_की_है_मरोड़_चाहे_छीजों_दुनिया_करोड़", src: "songs/8.mp3", img: "covers/8.jpeg" },
-      { title: "थारे_भरोसे_मारा_सांवरा_Sawariya_seth_Bhajan_गोकुल_शर्मा", src: "songs/9.mp3", img: "covers/9.jpeg" },
-      { title: "मत_करो_सांवरिया_लेट_कर_दो_मारो_सिस्टम_सेट", src: "songs/10.mp3", img: "covers/10.jpeg" }
-    ];
-
-    const audio = new Audio();
-    let current = 0;
-    let isPlaying = false;
-
-    const songList = document.getElementById("songList");
-    const nowPlayingFooter = document.getElementById("nowPlayingFooter");
-    const playBtn = document.getElementById("play");
-    const prevBtn = document.getElementById("prev");
-    const nextBtn = document.getElementById("next");
-    const seekbar = document.getElementById("seekbar");
-    const gif = document.getElementById("gif");
-
-    songs.forEach((song, index) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <img src="${song.img}" alt="song ${index + 1}">
-        <span>${song.title}</span>
-        <span class="song-duration" data-index="${index}">--:--</span>`;
-      li.onclick = () => loadTrack(index);
-      songList.appendChild(li);
-
-      const tempAudio = new Audio(song.src);
-      tempAudio.addEventListener('loadedmetadata', () => {
-        const durationSpan = document.querySelector(`.song-duration[data-index='${index}']`);
-        const mins = Math.floor(tempAudio.duration / 60);
-        const secs = Math.floor(tempAudio.duration % 60).toString().padStart(2, '0');
-        durationSpan.textContent = `${mins}:${secs}`;
-      });
-    });
-
-    function loadTrack(index) {
-      current = index;
-      audio.src = songs[current].src;
-      nowPlayingFooter.textContent = `Now Playing: ${songs[current].title}`;
-      document.querySelector(".main-image img").src = songs[current].img;
-      document.querySelectorAll("#songList li").forEach((li, i) => {
-        li.classList.toggle("active", i === index);
-      });
-      if (isPlaying) audio.play();
-    }
-
-    playBtn.onclick = () => {
-      if (!audio.src) loadTrack(current);
-      if (audio.paused) {
-        audio.play();
-        isPlaying = true;
-        playBtn.textContent = "⏸️";
-        gif.style.display = "inline";
-      } else {
-        audio.pause();
-        isPlaying = false;
-        playBtn.textContent = "▶️";
-        gif.style.display = "none";
-      }
-    };
-
-    prevBtn.onclick = () => {
-      current = (current - 1 + songs.length) % songs.length;
-      loadTrack(current);
-      audio.play();
-      isPlaying = true;
-      playBtn.textContent = "⏸️";
-      gif.style.display = "inline";
-    };
-
-    nextBtn.onclick = () => {
-      current = (current + 1) % songs.length;
-      loadTrack(current);
-      audio.play();
-      isPlaying = true;
-      playBtn.textContent = "⏸️";
-      gif.style.display = "inline";
-    };
-
-    audio.ontimeupdate = () => {
-      if (audio.duration) {
-        seekbar.max = audio.duration;
-        seekbar.value = audio.currentTime;
-      }
-    };
-
-    seekbar.oninput = () => {
-      audio.currentTime = seekbar.value;
-    };
-
-    audio.onended = () => {
-      gif.style.display = "none";
-      nextBtn.click();
-    };
-
-    loadTrack(0);
-  </script>
-</body>
-</html>
+li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  word-break: break-word;
+}
