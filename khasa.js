@@ -1,4 +1,5 @@
 const songs = [
+  { title: "Khasa_Aala_Chahar_Taara", src: "songs/86.mp3", img: "covers/86.jpg" },
   { title: "Father_Saab_Khasa_Aala_Chahar", src: "songs/71.mp3", img: "covers/71.jpeg" },
   { title: "Yaar_Haryane_Te_Khasa_Aala_Chahar", src: "songs/72.mp3", img: "covers/72.jpeg" },
   { title: "Babu_Khasa_Aala_Chahar", src: "songs/73.mp3", img: "covers/73.jpg" },
@@ -14,8 +15,7 @@ const songs = [
   { title: "Maa_Khasa_Aala_Chahar", src: "songs/83.mp3", img: "covers/83.jpg" },
   { title: "KHASA_AALA_CHAHAR_Hostel_Life", src: "songs/84.mp3", img: "covers/84.jpg" },
   { title: "KHASA_AALA_CHAHAR_LOOT_LIYA", src: "songs/85.mp3", img: "covers/85.jpg" },
-   { title: "Khasa_Aala_Chahar_Taara", src: "songs/86.mp3", img: "covers/86.jpg" },
-  { title: "REASON_Khasa_Aala_Chahar", src: "songs/87.mp3", img: "covers/87.jpg" },
+   { title: "REASON_Khasa_Aala_Chahar", src: "songs/87.mp3", img: "covers/87.jpg" },
   { title: "Khasa_Aala_Chahar_Example", src: "songs/88.mp3", img: "covers/88.jpg" },
   { title: "Flex_Khasa_Aala_Chahar", src: "songs/89.mp3", img: "covers/89.jpeg" },
   { title: "Convoy_Kafila_Khasa_Aala_Chahar", src: "songs/90.mp3", img: "covers/90.jpeg" }
