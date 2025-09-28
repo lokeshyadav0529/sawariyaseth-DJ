@@ -1,35 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> KHASA AALA CHAHAR </title>
-        <link rel="stylesheet" href="style.css">
-        </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khasa Aala Chahar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #000);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: #111;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #0ff;
+    }
+
+    .search-bar input {
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      width: 200px;
+      max-width: 50vw;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    /* Playlist Section */
+    .playlist {
+      width: 100%;
+      max-width: 600px;
+    }
+    .playlist h1 {
+      margin-bottom: 20px;
+      color: #0ff;
+      font-size: 1.6rem;
+    }
+    .playlist ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .playlist li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+      margin: 8px 0;
+      background: #222;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .playlist li:hover {
+      background: #333;
+    }
+    .song-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .song-info img {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .song-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .song-title {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .song-artist {
+      font-size: 0.85rem;
+      color: #bbb;
+    }
+
+    /* Player Section */
+    .player-view {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .player-cover img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+    .player-info {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .player-info h2 {
+      color: #0ff;
+      font-size: 1.4rem;
+      margin: 5px 0;
+    }
+    .player-info p {
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+    .player-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+    .player-controls div {
+      display: flex;
+      gap: 25px;
+    }
+    .player-controls button {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+    }
+    .player-controls button:hover {
+      color: #0ff;
+    }
+    .player-controls input[type="range"] {
+      width: 80%;
+      accent-color: #0ff;
+    }
+    .back-btn {
+      margin-top: 20px;
+      background: #0ff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .back-btn:hover {
+      background: #00cccc;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 600px) {
+      .playlist li {
+        padding: 10px;
+      }
+      .song-info img {
+        width: 45px;
+        height: 45px;
+      }
+      .song-title {
+        font-size: 0.95rem;
+      }
+      .song-artist {
+        font-size: 0.75rem;
+      }
+      .player-cover img {
+        width: 200px;
+        height: 200px;
+      }
+      .player-info h2 {
+        font-size: 1.2rem;
+      }
+    }
+    header {
+  background: #000;
+  color: #fff;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;  /* circular logo */
+  object-fit: cover;
+  border: 2px solid #0ff; /* stylish border */
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #0ff;
+  letter-spacing: 1px;
+}
+
+nav a {
+  color: #ccc;
+  margin: 0 14px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #0ff;
+}
+
+/* Responsive nav for mobile */
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  nav {
+    margin-top: 10px;
+  }
+}
+
+  </style>
+</head>
 <body>
+  <header>
+  <div class="logo">
+    <img src="covers/khasa.jpeg" alt="Massom Sharma" class="logo-img">
+    <span class="logo-text">Khasa Aala Chahar </span>
+  </div>
+  <nav>
+    <a href="index2.html">Home</a>
+    <a href="#">Albums</a>
+    <a href="#">Artists</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
 <main>
-    <div class="playlist">
-      <h1>KHASA AALA CHAHAR ALL SONG </h1>
+    <!-- Playlist Section -->
+    <div class="playlist" id="playlistSection">
+      <h1>🎵 All Songs</h1>
       <ul id="songList"></ul>
-      <div class="now-playing" id="nowPlaying"></div>
     </div>
-    <div class="main-image">
-      <img src="images/s1.jpg" alt="DJ Yadav Cover" />
+
+    <!-- Player Section -->
+    <div class="player-view" id="playerView">
+      <div class="player-cover">
+        <img id="playerCover" src="" alt="Song Cover">
+      </div>
+      <div class="player-info">
+        <h2 id="playerTitle">Song Title</h2>
+        <p id="playerArtist">Artist Name</p>
+      </div>
+      <div class="player-controls">
+        <div>
+          <button id="prev">⏮️</button>
+          <button id="play">▶️</button>
+          <button id="next">⏭️</button>
+        </div>
+        <input type="range" id="seekbar" value="0" min="0" max="100" />
+      </div>
+      <button class="back-btn" id="backBtn">⬅ Back to Playlist</button>
     </div>
   </main>
 
- <footer>
-    <div id="nowPlayingFooter" class="now-playing">Now Playing: --</div>
-    <div class="controls">
-      <img src="playing.gif" alt="Playing" id="gif" style="display: none;" />
-      <button id="prev">⏮️</button>
-      <button id="play">▶️</button>
-      <button id="next">⏭️</button>
-    </div>
-    <input type="range" id="seekbar" value="0" min="0" max="100" />
-  </footer>
+  <script>
+const songs =[
+  { title: "Father_Saab_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/71.mp3", img: "covers/71.jpeg" },
+  { title: "Yaar_Haryane_Te_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/72.mp3", img: "covers/72.jpeg" },
+  { title: "Babu_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/73.mp3", img: "covers/73.jpg" },
+  { title: "Byaah_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/74.mp3", img: "covers/74.jpg" },
+  { title: "Farmer_Flex_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/75.mp3", img: "covers/75.jpg" },
+   { title: "Jai_Veeru_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/76.mp3", img: "covers/76.jpeg" },
+  { title: "MOHTARMA_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/77.mp3", img: "covers/77.jpg" },
+  { title: "RUBBER_KHASA_AALA_CHAHAR_", artist: "Khasa aala chahar",src: "songs/78.mp3", img: "covers/78.jpg" },
+  { title: "KHASA_AALA_CHAHAR_DJ_NA_ROK_DIE_", artist: "Khasa aala chahar",src: "songs/79.mp3", img: "covers/79.jpg" },
+  { title: "KHASA_AALA_CHAHAR_FOOLAD_", artist: "Khasa aala chahar",src: "songs/80.mp3", img: "covers/80.jpg" },
+   { title: "Rajasthan_Khasa_Aala_Chahar",artist: "Khasa aala chahar", src: "songs/81.mp3", img: "covers/81.jpg" },
+  { title: "Lath_Official_Video_Khasa_Aala_Chahar ", artist: "Khasa aala chahar",src: "songs/82.mp3", img: "covers/82.jpg" },
+  { title: "Maa_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/83.mp3", img: "covers/83.jpg" },
+  { title: "KHASA_AALA_CHAHAR_Hostel_Life", artist: "Khasa aala chahar",src: "songs/84.mp3", img: "covers/84.jpg" },
+  { title: "KHASA_AALA_CHAHAR_LOOT_LIYA", artist: "Khasa aala chahar",src: "songs/85.mp3", img: "covers/85.jpg" },
+   { title: "Khasa_Aala_Chahar_Taara", artist: "Khasa aala chahar",src: "songs/86.mp3", img: "covers/86.jpg" },
+  { title: "REASON_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/87.mp3", img: "covers/87.jpg" },
+  { title: "Flex_Khasa_Aala_Chahar", artist: "Khasa aala chahar",src: "songs/89.mp3", img: "covers/89.jpeg" },
+  { title: "Convoy_Kafila_Khasa_Aala_Chahar",artist: "Khasa aala chahar", src: "songs/90.mp3", img: "covers/90.jpeg" }
+];
 
-  <script src="khasa.js"></script>
+    let current = 0;
+    let isPlaying = false;
+    const audio = new Audio();
+
+    const songList = document.getElementById("songList");
+    const playlistSection = document.getElementById("playlistSection");
+    const playerView = document.getElementById("playerView");
+    const playerCover = document.getElementById("playerCover");
+    const playerTitle = document.getElementById("playerTitle");
+    const playerArtist = document.getElementById("playerArtist");
+    const playBtn = document.getElementById("play");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+    const seekbar = document.getElementById("seekbar");
+    const backBtn = document.getElementById("backBtn");
+
+    // Load songs in playlist
+    songs.forEach((song, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <div class="song-info">
+          <img src="${song.img}" alt="${song.title}">
+          <div class="song-details">
+            <span class="song-title">${song.title}</span>
+            <span class="song-artist">${song.artist}</span>
+          </div>
+        </div>
+      `;
+      li.addEventListener("click", () => loadTrack(index));
+      songList.appendChild(li);
+    });
+
+    function loadTrack(index) {
+      current = index;
+      audio.src = songs[current].src;
+
+      playlistSection.style.display = "none";
+      playerView.style.display = "flex";
+
+      playerCover.src = songs[current].img;
+      playerTitle.textContent = songs[current].title;
+      playerArtist.textContent = songs[current].artist;
+
+      if (isPlaying) audio.play();
+    }
+
+    function playPause() {
+      if (isPlaying) {
+        audio.pause();
+        playBtn.textContent = "▶️";
+      } else {
+        audio.play();
+        playBtn.textContent = "⏸️";
+      }
+      isPlaying = !isPlaying;
+    }
+
+    function prevTrack() {
+      current = (current - 1 + songs.length) % songs.length;
+      loadTrack(current);
+      audio.play();
+      isPlaying = true;
+      playBtn.textContent = "⏸️";
+    }
+
+    function nextTrack() {
+      current = (current + 1) % songs.length;
+      loadTrack(current);
+      audio.play();
+      isPlaying = true;
+      playBtn.textContent = "⏸️";
+    }
+
+    audio.addEventListener("timeupdate", () => {
+      seekbar.value = (audio.currentTime / audio.duration) * 100 || 0;
+    });
+
+    seekbar.addEventListener("input", () => {
+      audio.currentTime = (seekbar.value / 100) * audio.duration;
+    });
+
+    playBtn.addEventListener("click", playPause);
+    prevBtn.addEventListener("click", prevTrack);
+    nextBtn.addEventListener("click", nextTrack);
+
+    // Back to Playlist
+    backBtn.addEventListener("click", () => {
+      audio.pause();
+      isPlaying = false;
+      playBtn.textContent = "▶️";
+      playerView.style.display = "none";
+      playlistSection.style.display = "block";
+    });
+  </script>
 </body>
 </html>
