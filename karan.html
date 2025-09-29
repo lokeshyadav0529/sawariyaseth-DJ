@@ -13,13 +13,20 @@ body {
 }
 header {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 15px;
+  justify-content: center;
+  padding: 12px;
   background: #000;
   font-size: 20px;
   font-weight: bold;
   color: #1DB954;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header img {
+  height: 30px;
+  margin-right: 10px;
 }
 .playlist {
   padding: 10px;
@@ -35,6 +42,7 @@ header {
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
+  touch-action: pan-y;
 }
 .song:hover { background: #2e2e2e; transform: scale(1.02);}
 .song.active { border: 2px solid #1DB954; }
@@ -72,9 +80,10 @@ header {
   max-width: 300px;
   border-radius: 50%;
   margin: 20px 0;
-  transition: transform 0.5s;
+  transition: transform 0.5s linear;
 }
-.cover.playing { transform: rotate(360deg); }
+.cover.playing { animation: spin 8s linear infinite; }
+@keyframes spin { 0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);} }
 
 .song-details { text-align: center; margin: 10px 0; }
 .song-details h2 { font-size: 22px; margin: 5px 0; }
@@ -163,10 +172,11 @@ header {
 </head>
 <body>
 
-<header>🎵 Karan aujla</header>
+<header>
+  <img src="karan.jpeg" alt="Logo"> Karan Aujla
+</header>
 
 <div class="playlist" id="playlist">
- 
   <div class="song" onclick="playSong(0)">
     <img src="covers/159.jpeg" alt="">
     <div class="song-info"><strong>NA_NA_NA</strong><span>Karan Aujla</span></div>
@@ -303,9 +313,10 @@ const songs = [
   { title: "NOTHING_LASTS",artist: "Karan Aujla", src: "songs/177.mp3", cover: "covers/177.jpeg" },
   { title: "At_Peace", artist: "Karan Aujla",src: "songs/178.mp3", cover: "covers/178.jpeg" }
 ];
-let currentSong=0;
+
+let currentSong=0, startX=0, endX=0;
 const audio=document.getElementById("audio");
-const cover=document.getElementById("cover");
+const coverImg=document.getElementById("cover");
 const title=document.getElementById("title");
 const artist=document.getElementById("artist");
 const progressBar=document.getElementById("progressBar");
@@ -318,13 +329,12 @@ const miniTitle=document.getElementById("miniTitle");
 const miniArtist=document.getElementById("miniArtist");
 const miniCover=document.getElementById("miniCover");
 const miniPlayPause=document.getElementById("miniPlayPause");
-const coverImg=document.getElementById("cover");
 
 function playSong(index){
   currentSong=index;
   const song=songs[currentSong];
   audio.src=song.src;
-  cover.src=song.cover;
+  coverImg.src=song.cover;
   coverImg.classList.add('playing');
   title.textContent=song.title;
   artist.textContent=song.artist;
@@ -343,25 +353,12 @@ function backToPlaylist(){
 }
 
 function togglePlay(){
-  if(audio.paused){
-    audio.play();
-    playPauseBtn.textContent="⏸";
-    miniPlayPause.textContent="⏸";
-    coverImg.classList.add('playing');
-  } else {
-    audio.pause();
-    playPauseBtn.textContent="▶";
-    miniPlayPause.textContent="▶";
-    coverImg.classList.remove('playing');
-  }
+  if(audio.paused){audio.play(); playPauseBtn.textContent="⏸"; miniPlayPause.textContent="⏸"; coverImg.classList.add('playing');}
+  else{audio.pause(); playPauseBtn.textContent="▶"; miniPlayPause.textContent="▶"; coverImg.classList.remove('playing');}
 }
 
 miniPlayPause.addEventListener("click",(e)=>{e.stopPropagation(); togglePlay();});
-miniPlayer.addEventListener("click",()=>{
-  document.getElementById("player").style.display="flex";
-  playlistEl.style.display="none";
-  miniPlayer.style.display="none";
-});
+miniPlayer.addEventListener("click",()=>{document.getElementById("player").style.display="flex"; playlistEl.style.display="none"; miniPlayer.style.display="none";});
 
 function nextSong(){currentSong=(currentSong+1)%songs.length; playSong(currentSong);}
 function prevSong(){currentSong=(currentSong-1+songs.length)%songs.length; playSong(currentSong);}
@@ -374,6 +371,15 @@ function updateMiniPlayer(){
   miniCover.src=song.cover;
   miniPlayPause.textContent="⏸";
 }
+
+// Swipe detection on playlist
+playlistEl.addEventListener('touchstart',(e)=>{startX=e.touches[0].clientX;});
+playlistEl.addEventListener('touchend',(e)=>{
+  endX=e.changedTouches[0].clientX;
+  let diff=endX-startX;
+  if(diff>50) prevSong(); // swipe right
+  else if(diff<-50) nextSong(); // swipe left
+});
 
 audio.addEventListener("timeupdate",()=>{
   const progress=(audio.currentTime/audio.duration)*100;
