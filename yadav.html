@@ -1,422 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yadav </title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1a1a1a, #000);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      background: #111;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-    }
-
-    .logo {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #0ff;
-    }
-
-    .search-bar input {
-      padding: 8px 12px;
-      border-radius: 20px;
-      border: none;
-      outline: none;
-      width: 200px;
-      max-width: 50vw;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      overflow-y: auto;
-    }
-
-    /* Playlist Section */
-    .playlist {
-      width: 100%;
-      max-width: 600px;
-    }
-    .playlist h1 {
-      margin-bottom: 20px;
-      color: #0ff;
-      font-size: 1.6rem;
-    }
-    .playlist ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      width: 100%;
-    }
-    .playlist li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 15px;
-      margin: 8px 0;
-      background: #222;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .playlist li:hover {
-      background: #333;
-    }
-    .song-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .song-info img {
-      width: 50px;
-      height: 50px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-    .song-details {
-      display: flex;
-      flex-direction: column;
-    }
-    .song-title {
-      font-size: 1rem;
-      font-weight: bold;
-      color: #fff;
-    }
-    .song-artist {
-      font-size: 0.85rem;
-      color: #bbb;
-    }
-
-    /* Player Section */
-    .player-view {
-      flex: 1;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .player-cover img {
-      width: 260px;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      margin-bottom: 20px;
-    }
-    .player-info {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-    .player-info h2 {
-      color: #0ff;
-      font-size: 1.4rem;
-      margin: 5px 0;
-    }
-    .player-info p {
-      font-size: 0.9rem;
-      color: #bbb;
-    }
-    .player-controls {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      width: 100%;
-    }
-    .player-controls div {
-      display: flex;
-      gap: 25px;
-    }
-    .player-controls button {
-      background: none;
-      border: none;
-      font-size: 2rem;
-      color: #fff;
-      cursor: pointer;
-    }
-    .player-controls button:hover {
-      color: #0ff;
-    }
-    .player-controls input[type="range"] {
-      width: 80%;
-      accent-color: #0ff;
-    }
-    .back-btn {
-      margin-top: 20px;
-      background: #0ff;
-      color: #000;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .back-btn:hover {
-      background: #00cccc;
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 600px) {
-      .playlist li {
-        padding: 10px;
-      }
-      .song-info img {
-        width: 45px;
-        height: 45px;
-      }
-      .song-title {
-        font-size: 0.95rem;
-      }
-      .song-artist {
-        font-size: 0.75rem;
-      }
-      .player-cover img {
-        width: 200px;
-        height: 200px;
-      }
-      .player-info h2 {
-        font-size: 1.2rem;
-      }
-    }
-    header {
-  background: #000;
-  color: #fff;
-  padding: 12px 30px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>yadav song</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #121212;
+  color: white;
+}
+header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: #000;
+  font-size: 20px;
+  font-weight: bold;
+  color: #1DB954;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
 }
-
-.logo {
+header img {
+  height: 30px;
+  margin-right: 10px;
+}
+.playlist {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.song {
   display: flex;
   align-items: center;
-  gap: 12px;
+  background: #1e1e1e;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  touch-action: pan-y;
 }
-
-.logo-img {
-  height: 55px;
-  width: 55px;
-  border-radius: 50%;  /* circular logo */
+.song:hover { background: #2e2e2e; transform: scale(1.02);}
+.song.active { border: 2px solid #1DB954; }
+.song img {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  margin-right: 12px;
   object-fit: cover;
-  border: 2px solid #0ff; /* stylish border */
+}
+.song-info { display: flex; flex-direction: column; }
+.song-info strong { font-size: 16px; }
+.song-info span { color: #bbb; font-size: 14px; }
+
+.player {
+  display: none;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 100px;
+  align-items: center;
+}
+.player-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+.back-btn {
+  font-size: 22px;
+  cursor: pointer;
+  color: white;
+}
+.cover {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 50%;
+  margin: 20px 0;
+  transition: transform 0.5s linear;
+}
+.cover.playing { animation: spin 8s linear infinite; }
+@keyframes spin { 0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);} }
+
+.song-details { text-align: center; margin: 10px 0; }
+.song-details h2 { font-size: 22px; margin: 5px 0; }
+.song-details p { font-size: 16px; color: #bbb; }
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin: 15px 0;
+}
+.controls button {
+  background: #1DB954;
+  border: none;
+  color: white;
+  font-size: 28px;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.controls button:hover { transform: scale(1.1); background: #1ed760; }
+
+.progress {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #bbb;
+  font-size: 12px;
+}
+.progress input {
+  flex: 1;
+  appearance: none;
+  height: 5px;
+  border-radius: 2px;
+  background: #555;
+  cursor: pointer;
+}
+.progress input::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #1DB954;
+  cursor: pointer;
 }
 
-.logo-text {
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #0ff;
-  letter-spacing: 1px;
+#miniPlayer {
+  position: fixed;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 70px;
+  background: #1e1e1e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  gap: 10px;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.6);
+  display: none;
+}
+#miniPlayer img {
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+#miniPlayer button {
+  background: #1DB954;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 22px;
+  width: 45px; height: 45px;
+  cursor: pointer;
 }
 
-nav a {
-  color: #ccc;
-  margin: 0 14px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
+@media(max-width:480px){
+  .song img { width: 50px; height: 50px; }
+  .controls button { width: 50px; height: 50px; font-size: 24px; }
+  .cover { max-width: 250px; }
+  #miniPlayer button { width: 40px; height: 40px; font-size: 20px; }
 }
-
-nav a:hover {
-  color: #0ff;
-}
-
-/* Responsive nav for mobile */
-@media (max-width: 700px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  nav {
-    margin-top: 10px;
-  }
-}
-
-  </style>
+</style>
 </head>
 <body>
-  <header>
-  <div class="logo">
-    <img src="yadav.jpeg" alt="Massom Sharma" class="logo-img">
-    <span class="logo-text">Yadav </span>
-  </div>
-  <nav>
-    <a href="index2.html">Home</a>
-    <a href="#">Albums</a>
-    <a href="artist.html">Artists</a>
-    <a href="#">Contact</a>
-  </nav>
+
+<header>
+  <img src="yadav.jpeg" alt="Logo"> YADAV SONG
 </header>
-<main>
-    <!-- Playlist Section -->
-    <div class="playlist" id="playlistSection">
-      <h1>🎵 All Songs</h1>
-      <ul id="songList"></ul>
-    </div>
 
-    <!-- Player Section -->
-    <div class="player-view" id="playerView">
-      <div class="player-cover">
-        <img id="playerCover" src="" alt="Song Cover">
-      </div>
-      <div class="player-info">
-        <h2 id="playerTitle">Song Title</h2>
-        <p id="playerArtist">Artist Name</p>
-      </div>
-      <div class="player-controls">
-        <div>
-          <button id="prev">⏮️</button>
-          <button id="play">▶️</button>
-          <button id="next">⏭️</button>
-        </div>
-        <input type="range" id="seekbar" value="0" min="0" max="100" />
-      </div>
-      <button class="back-btn" id="backBtn">⬅ Back to Playlist</button>
-    </div>
-  </main>
+<div class="playlist" id="playlist">
+  <div class="song" onclick="playSong(0)">
+    <img src="covers/123.jpeg" alt="">
+    <div class="song-info"><strong>YADAV_BRAND</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(1)">
+    <img src="covers/124.jpeg" alt="">
+    <div class="song-info"><strong>YADAV_BRAND 2</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(2)">
+    <img src="covers/125.jpeg" alt="">
+    <div class="song-info"><strong>YADAV_BRAND 3 </strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(3)">
+    <img src="covers/126.jpeg" alt="">
+    <div class="song-info"><strong>YADAV_BRAND 4</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(4)">
+    <img src="covers/127.jpeg" alt="">
+    <div class="song-info"><strong>YADAV_BRAND_RETURNS</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(5)">
+    <img src="covers/128.jpeg" alt="">
+    <div class="song-info"><strong>YADAV_BRAND_DRILL</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(6)">
+    <img src="covers/129.jpeg" alt="">
+    <div class="song-info"><strong>Rao_Sahab_Retro</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(7)">
+    <img src="covers/130.jpeg" alt="">
+    <div class="song-info"><strong>Rao_Sahab_hain</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(8)">
+    <img src="covers/131.jpeg" alt="">
+    <div class="song-info"><strong>Rao_Sahab_Rollin</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(9)">
+    <img src="covers/132.jpeg" alt="">
+    <div class="song-info"><strong>Shree_Krishan_Ji_Ke_Vanshaj</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(10)">
+    <img src="covers/133.jpeg" alt="">
+    <div class="song-info"><strong>Kaali_Burshat</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(11)">
+    <img src="covers/134.jpeg" alt="">
+    <div class="song-info"><strong>Yadav_Yadav </strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(12)">
+    <img src="covers/135.jpeg" alt="">
+    <div class="song-info"><strong>Rao_Sahabni</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(13)">
+    <img src="covers/136.jpeg" alt="">
+    <div class="song-info"><strong>Rao_Sahab</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(14)">
+    <img src="covers/137.jpeg" alt="">
+    <div class="song-info"><strong>Mere_Aala_Rao_Sahab</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(15)">
+    <img src="covers/138.jpeg" alt="">
+    <div class="song-info"><strong>Yadav_Gharana</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(16)">
+    <img src="covers/139.jpeg" alt="">
+    <div class="song-info"><strong>Rao_Sahabni 2</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(17)">
+    <img src="covers/140.jpeg" alt="">
+    <div class="song-info"><strong>Yadav_Likhwaya</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(18)">
+    <img src="covers/141.jpeg" alt="">
+    <div class="song-info"><strong>Rao_Sahab</strong><span>Rao Sahab</span></div>
+  </div>
+   <div class="song" onclick="playSong(19)">
+    <img src="covers/142.jpeg" alt="">
+    <div class="song-info"><strong>Rao_Sahab</strong><span>Rao Sahab</span></div>
+  </div>
+      <div class="song" onclick="playSong(20)">
+    <img src="covers/143.jpeg" alt="">
+    <div class="song-info"><strong>RANGE OF  RAOSAHAB</strong><span>Rao Sahab</span></div>
+  </div>
+     <div class="song" onclick="playSong(21)">
+    <img src="covers/144.jpeg" alt="">
+    <div class="song-info"><strong>Riyasat</strong><span>Rao Sahab</span></div>
+  </div>
+     <div class="song" onclick="playSong(22)">
+    <img src="covers/145.jpeg" alt="">
+    <div class="song-info"><strong>Yadav_ki_haveli</strong><span>Rao Sahab</span></div>
+  </div>
+      <div class="song" onclick="playSong(23)">
+    <img src="covers/146.jpeg" alt="">
+    <div class="song-info"><strong>Yadav_Kon_Kehvega_Re</strong><span>Rao Sahab</span></div>
+  </div>
+     <div class="song" onclick="playSong(24)">
+    <img src="covers/147.jpeg" alt="">
+    <div class="song-info"><strong>Rao_Sahab_Drill_2</strong><span>Rao Sahab</span></div>
+  </div>
+     <div class="song" onclick="playSong(25)">
+    <img src="covers/148.jpeg" alt="">
+    <div class="song-info"><strong>yadav_kul</strong><span>Rao Sahab</span></div>
+  </div>
 
-  <script>
+</div>
 
-const songs = [
-  { title: "YADAV_BRAND", artist: "Rao Sahab", src: "songs/123.mp3", img: "covers/123.jpeg" },
-  { title: "Yadav_Brand_2", artist: "Rao Sahab", src: "songs/124.mp3", img: "covers/124.jpeg" },
-  { title: "Yadav_Brand_3",artist: "Rao Sahab",  src: "songs/125.mp3", img: "covers/125.jpeg" },
-  { title: "Yadav_Brand_4", artist: "Rao Sahab", src: "songs/126.mp3", img: "covers/126.jpeg" },
-  { title: "YADAV_BRAND_RETURNS", artist: "Rao Sahab", src: "songs/127.mp3", img: "covers/127.jpeg" },
-   { title: "Yadav_Brand_Drill", artist: "Rao Sahab", src: "songs/128.mp3", img: "covers/128.jpeg" },
-  { title: "Rao_Sahab_Retro", artist: "Rao Sahab", src: "songs/129.mp3", img: "covers/129.jpeg" },
-  { title: "Rao_Sahab_Hain", artist: "Rao Sahab", src: "songs/130.mp3", img: "covers/130.jpeg" },
-  { title: "Rao_Sahab_Rollin", artist: "Rao Sahab", src: "songs/131.mp3", img: "covers/131.jpeg" },
-  { title: "Shree_Krishan_Ji_Ke_Vanshaj", artist: "Rao Sahab", src: "songs/132.mp3", img: "covers/132.jpeg" },
-   { title: "Kaali_Burshat", artist: "Rao Sahab", src: "songs/133.mp3", img: "covers/133.jpeg" },
-  { title: "Yadav_Yadav ", artist: "Rao Sahab", src: "songs/134.mp3", img: "covers/134.jpeg" },
-  { title: "Rao_Sahabni", artist: "Rao Sahab", src: "songs/135.mp3", img: "covers/135.jpeg" },
-  { title: "Rao_Sahab", artist: "Rao Sahab", src: "songs/136.mp3", img: "covers/136.jpeg" },
-  { title: "Mere_Aala_Rao_Sahab", artist: "Rao Sahab", src: "songs/137.mp3", img: "covers/137.jpeg" },
-   { title: "Yadav_Gharana", artist: "Rao Sahab", src: "songs/138.mp3", img: "covers/138.jpeg" },
-  { title: "Rao_Sahabni 2", artist: "Rao Sahab", src: "songs/139.mp3", img: "covers/139.jpeg" },
-  { title: "Yadav_Likhwaya", artist: "Rao Sahab", src: "songs/140.mp3", img: "covers/140.jpeg" },
-  { title: "Rao_Sahab", artist: "Rao Sahab", src: "songs/141.mp3", img: "covers/141.jpeg" },
-  { title: "Rao_Sahab", artist: "Rao Sahab", src: "songs/142.mp3", img: "covers/142.jpeg" },
-  { title:  "RANGE OF  RAOSAHAB", artist: "Rao Sahab", src: "songs/143.mp3", img: "covers/143.jpeg" },
-  { title: "Riyasat", artist: "Rao Sahab", src: "songs/144.mp3", img: "covers/144.jpeg" },
-  { title: "Yadav_ki_haveli", artist: "Rao Sahab", src: "songs/145.mp3", img: "covers/145.jpeg" },
-  { title: "Yadav_Kon_Kehvega_Re", artist: "Rao Sahab", src: "songs/146.mp3", img: "covers/146.jpeg" },
-  { title: "Rao_Sahab_Drill_2", artist: "Rao Sahab", src: "songs/147.mp3", img: "covers/147.jpeg" },
-  { title: "yadav_kul", artist: "Rao Sahab", src: "songs/148.mp3", img: "covers/148.jpeg" }
+<div class="player" id="player">
+  <div class="player-header">
+    <span class="back-btn" onclick="backToPlaylist()">⬅ Back</span>
+  </div>
+  <img id="cover" class="cover" src="" alt="cover">
+  <div class="song-details">
+    <h2 id="title"></h2>
+    <p id="artist"></p>
+  </div>
+  <div class="progress">
+    <span id="currentTime">0:00</span>
+    <input type="range" id="progressBar" min="0" max="100" value="0">
+    <span id="duration">0:00</span>
+  </div>
+  <div class="controls">
+    <button onclick="prevSong()">⏮</button>
+    <button onclick="togglePlay()" id="playPause">▶</button>
+    <button onclick="nextSong()">⏭</button>
+  </div>
+  <audio id="audio"></audio>
+</div>
+
+<div id="miniPlayer">
+  <img id="miniCover" src="" alt="cover">
+  <div><strong id="miniTitle">Song</strong> - <span id="miniArtist">Artist</span></div>
+  <button id="miniPlayPause">⏸</button>
+</div>
+
+<script>const songs = [
+  { title: "YADAV_BRAND", artist: "Rao Sahab", src: "songs/123.mp3", cover: "covers/123.jpeg" },
+  { title: "Yadav_Brand_2", artist: "Rao Sahab", src: "songs/124.mp3", cover: "covers/124.jpeg" },
+  { title: "Yadav_Brand_3",artist: "Rao Sahab",  src: "songs/125.mp3", cover: "covers/125.jpeg" },
+  { title: "Yadav_Brand_4", artist: "Rao Sahab", src: "songs/126.mp3", cover: "covers/126.jpeg"},
+  { title: "YADAV_BRAND_RETURNS", artist: "Rao Sahab", src: "songs/127.mp3", cover: "covers/127.jpeg" },
+   { title: "Yadav_Brand_Drill", artist: "Rao Sahab", src: "songs/128.mp3", cover: "covers/128.jpeg" },
+  { title: "Rao_Sahab_Retro", artist: "Rao Sahab", src: "songs/129.mp3", cover: "covers/129.jpeg" },
+  { title: "Rao_Sahab_Hain", artist: "Rao Sahab", src: "songs/130.mp3", cover: "covers/130.jpeg" },
+  { title: "Rao_Sahab_Rollin", artist: "Rao Sahab", src: "songs/131.mp3", cover: "covers/131.jpeg" },
+  { title: "Shree_Krishan_Ji_Ke_Vanshaj", artist: "Rao Sahab", src: "songs/132.mp3", cover: "covers/132.jpeg" },
+   { title: "Kaali_Burshat", artist: "Rao Sahab", src: "songs/133.mp3", cover: "covers/133.jpeg" },
+  { title: "Yadav_Yadav ", artist: "Rao Sahab", src: "songs/134.mp3", cover: "covers/134.jpeg" },
+  { title: "Rao_Sahabni", artist: "Rao Sahab", src: "songs/135.mp3", cover: "covers/135.jpeg" },
+  { title: "Rao_Sahab", artist: "Rao Sahab", src: "songs/136.mp3", cover: "covers/136.jpeg" },
+  { title: "Mere_Aala_Rao_Sahab", artist: "Rao Sahab", src: "songs/137.mp3", cover: "covers/137.jpeg" },
+   { title: "Yadav_Gharana", artist: "Rao Sahab", src: "songs/138.mp3", cover: "covers/138.jpeg" },
+  { title: "Rao_Sahabni 2", artist: "Rao Sahab", src: "songs/139.mp3", cover: "covers/139.jpeg" },
+  { title: "Yadav_Likhwaya", artist: "Rao Sahab", src: "songs/140.mp3", cover: "covers/140.jpeg" },
+  { title: "Rao_Sahab", artist: "Rao Sahab", src: "songs/141.mp3", cover: "covers/141.jpeg" },
+  { title: "Rao_Sahab", artist: "Rao Sahab", src: "songs/142.mp3", cover: "covers/142.jpeg" },
+  { title:  "RANGE OF  RAOSAHAB", artist: "Rao Sahab", src: "songs/143.mp3", cover: "covers/143.jpeg" },
+  { title: "Riyasat", artist: "Rao Sahab", src: "songs/144.mp3", cover: "covers/144.jpeg" },
+  { title: "Yadav_ki_haveli", artist: "Rao Sahab", src: "songs/145.mp3", cover: "covers/145.jpeg" },
+  { title: "Yadav_Kon_Kehvega_Re", artist: "Rao Sahab", src: "songs/146.mp3", cover: "covers/146.jpeg" },
+  { title: "Rao_Sahab_Drill_2", artist: "Rao Sahab", src: "songs/147.mp3", cover: "covers/147.jpeg" },
+  { title: "yadav_kul", artist: "Rao Sahab", src: "songs/148.mp3", cover: "covers/148.jpeg" }
 ];
-    let current = 0;
-    let isPlaying = false;
-    const audio = new Audio();
+let currentSong=0, startX=0, endX=0;
+const audio=document.getElementById("audio");
+const coverImg=document.getElementById("cover");
+const title=document.getElementById("title");
+const artist=document.getElementById("artist");
+const progressBar=document.getElementById("progressBar");
+const currentTimeEl=document.getElementById("currentTime");
+const durationEl=document.getElementById("duration");
+const playPauseBtn=document.getElementById("playPause");
+const playlistEl=document.getElementById("playlist");
+const miniPlayer=document.getElementById("miniPlayer");
+const miniTitle=document.getElementById("miniTitle");
+const miniArtist=document.getElementById("miniArtist");
+const miniCover=document.getElementById("miniCover");
+const miniPlayPause=document.getElementById("miniPlayPause");
 
-    const songList = document.getElementById("songList");
-    const playlistSection = document.getElementById("playlistSection");
-    const playerView = document.getElementById("playerView");
-    const playerCover = document.getElementById("playerCover");
-    const playerTitle = document.getElementById("playerTitle");
-    const playerArtist = document.getElementById("playerArtist");
-    const playBtn = document.getElementById("play");
-    const prevBtn = document.getElementById("prev");
-    const nextBtn = document.getElementById("next");
-    const seekbar = document.getElementById("seekbar");
-    const backBtn = document.getElementById("backBtn");
+function playSong(index){
+  currentSong=index;
+  const song=songs[currentSong];
+  audio.src=song.src;
+  coverImg.src=song.cover;
+  coverImg.classList.add('playing');
+  title.textContent=song.title;
+  artist.textContent=song.artist;
+  playlistEl.style.display="none";
+  document.getElementById("player").style.display="flex";
+  audio.play();
+  playPauseBtn.textContent="⏸";
+  updateMiniPlayer();
+  updateActiveSong();
+}
 
-    // Load songs in playlist
-    songs.forEach((song, index) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <div class="song-info">
-          <img src="${song.img}" alt="${song.title}">
-          <div class="song-details">
-            <span class="song-title">${song.title}</span>
-            <span class="song-artist">${song.artist}</span>
-          </div>
-        </div>
-      `;
-      li.addEventListener("click", () => loadTrack(index));
-      songList.appendChild(li);
-    });
+function backToPlaylist(){
+  document.getElementById("player").style.display="none";
+  playlistEl.style.display="block";
+  miniPlayer.style.display="flex";
+}
 
-    function loadTrack(index) {
-      current = index;
-      audio.src = songs[current].src;
+function togglePlay(){
+  if(audio.paused){audio.play(); playPauseBtn.textContent="⏸"; miniPlayPause.textContent="⏸"; coverImg.classList.add('playing');}
+  else{audio.pause(); playPauseBtn.textContent="▶"; miniPlayPause.textContent="▶"; coverImg.classList.remove('playing');}
+}
 
-      playlistSection.style.display = "none";
-      playerView.style.display = "flex";
+miniPlayPause.addEventListener("click",(e)=>{e.stopPropagation(); togglePlay();});
+miniPlayer.addEventListener("click",()=>{document.getElementById("player").style.display="flex"; playlistEl.style.display="none"; miniPlayer.style.display="none";});
 
-      playerCover.src = songs[current].img;
-      playerTitle.textContent = songs[current].title;
-      playerArtist.textContent = songs[current].artist;
+function nextSong(){currentSong=(currentSong+1)%songs.length; playSong(currentSong);}
+function prevSong(){currentSong=(currentSong-1+songs.length)%songs.length; playSong(currentSong);}
+function updateActiveSong(){document.querySelectorAll(".song").forEach((el,i)=>{el.classList.toggle("active",i===currentSong);});}
+function updateMiniPlayer(){
+  miniPlayer.style.display="flex";
+  const song=songs[currentSong];
+  miniTitle.textContent=song.title;
+  miniArtist.textContent=song.artist;
+  miniCover.src=song.cover;
+  miniPlayPause.textContent="⏸";
+}
 
-      if (isPlaying) audio.play();
-    }
+// Swipe detection on playlist
+playlistEl.addEventListener('touchstart',(e)=>{startX=e.touches[0].clientX;});
+playlistEl.addEventListener('touchend',(e)=>{
+  endX=e.changedTouches[0].clientX;
+  let diff=endX-startX;
+  if(diff>50) prevSong(); // swipe right
+  else if(diff<-50) nextSong(); // swipe left
+});
 
-    function playPause() {
-      if (isPlaying) {
-        audio.pause();
-        playBtn.textContent = "▶️";
-      } else {
-        audio.play();
-        playBtn.textContent = "⏸️";
-      }
-      isPlaying = !isPlaying;
-    }
+audio.addEventListener("timeupdate",()=>{
+  const progress=(audio.currentTime/audio.duration)*100;
+  progressBar.value=progress||0;
+  currentTimeEl.textContent=formatTime(audio.currentTime);
+  durationEl.textContent=formatTime(audio.duration);
+});
+progressBar.addEventListener("input",()=>{audio.currentTime=(progressBar.value/100)*audio.duration;});
+audio.addEventListener("ended",()=>{nextSong();});
+audio.addEventListener("loadedmetadata",()=>{durationEl.textContent=formatTime(audio.duration);});
 
-    function prevTrack() {
-      current = (current - 1 + songs.length) % songs.length;
-      loadTrack(current);
-      audio.play();
-      isPlaying = true;
-      playBtn.textContent = "⏸️";
-    }
+function formatTime(seconds){
+  if(isNaN(seconds)) return "0:00";
+  const minutes=Math.floor(seconds/60);
+  const secs=Math.floor(seconds%60);
+  return `${minutes}:${secs<10?'0':''}${secs}`;
+}
+</script>
 
-    function nextTrack() {
-      current = (current + 1) % songs.length;
-      loadTrack(current);
-      audio.play();
-      isPlaying = true;
-      playBtn.textContent = "⏸️";
-    }
-
-    audio.addEventListener("timeupdate", () => {
-      seekbar.value = (audio.currentTime / audio.duration) * 100 || 0;
-    });
-
-    seekbar.addEventListener("input", () => {
-      audio.currentTime = (seekbar.value / 100) * audio.duration;
-    });
-
-    playBtn.addEventListener("click", playPause);
-    prevBtn.addEventListener("click", prevTrack);
-    nextBtn.addEventListener("click", nextTrack);
-
-    // Back to Playlist
-    backBtn.addEventListener("click", () => {
-      audio.pause();
-      isPlaying = false;
-      playBtn.textContent = "▶️";
-      playerView.style.display = "none";
-      playlistSection.style.display = "block";
-    });
-  </script>
 </body>
 </html>
+
+
+
